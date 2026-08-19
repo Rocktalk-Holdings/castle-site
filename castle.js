@@ -70,9 +70,39 @@
     animated.forEach(function (el) { obs.observe(el); });
   }
 
+  /* ── Architecture diagram reveal ── */
+  function initDiagramReveal() {
+    var svgs = document.querySelectorAll('.arch-svg');
+    if (!svgs.length) return;
+
+    if (prefersReducedMotion) {
+      svgs.forEach(function (svg) { svg.classList.add('visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var svg = entry.target;
+          var idx = parseInt(svg.getAttribute('data-diag-index'), 10) || 0;
+          setTimeout(function () {
+            svg.classList.add('visible');
+          }, idx * 120);
+          observer.unobserve(svg);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    svgs.forEach(function (svg, idx) {
+      svg.setAttribute('data-diag-index', idx);
+      observer.observe(svg);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initAnatomyReveal();
     initNavScroll();
     initOffscreenPause();
+    initDiagramReveal();
   });
 }());

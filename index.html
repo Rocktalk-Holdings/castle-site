@@ -225,12 +225,264 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
+         ARCHITECTURE — system diagrams
+    ═══════════════════════════════════════════ -->
+    <section aria-labelledby="arch-heading">
+      <div class="container">
+        <div class="section-preamble">
+          <span class="label-mono">04 / The architecture</span>
+          <h2 id="arch-heading" class="section-heading">
+            The metaphor runs<br />all the way down.
+          </h2>
+          <p>Two views of the same system. The left shows what happens inside one Castle installation — how a single employee's day flows through the cabinet. The right shows why no two castles ever touch.</p>
+        </div>
+
+        <div class="arch-diagrams">
+
+          <!-- Diagram 1: Inside one Castle — anchor and newsroom model -->
+          <div class="arch-diagram-wrap">
+            <div class="arch-diagram-label">Fig. 1 — Inside one Castle</div>
+            <!--
+              Text alternative: The knight's looking glass (left) connects bidirectionally
+              to the cabinet — a file stack containing plate/today, pipeline, and ledger.
+              Four brain seats surround the cabinet and coordinate exclusively through it:
+              Squire Voice (fast LLM), Deep Worker / the Keep (full Hermes agent),
+              Coaching Analyst, and Escalator. All model calls exit downward to
+              YOUR MODELS / YOUR METAL. A gate line separates the cabinet from HQ/Owner,
+              crossed only by a line labeled "asks, never acts."
+            -->
+            <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg"
+                 role="img"
+                 aria-label="Inside one Castle: The Knight's looking glass connects to the cabinet file stack (plate, pipeline, ledger). Four brain seats — Squire Voice, Deep Worker / The Keep, Coaching Analyst, Escalator — surround the cabinet and connect only through it. All model calls exit downward to YOUR MODELS / YOUR METAL. A gate separates everything from HQ / Owner, crossed by a single line labeled asks, never acts."
+                 class="arch-svg">
+              <defs>
+                <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#4A7FA5"/>
+                </marker>
+                <marker id="arr-dim" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#3A3A3F"/>
+                </marker>
+                <marker id="arr-down" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto">
+                  <path d="M0,0 L6,0 L3,6 Z" fill="#555558"/>
+                </marker>
+              </defs>
+
+              <!-- Background -->
+              <rect width="620" height="400" fill="#0A0A0B"/>
+
+              <!-- ── THE KNIGHT (left) ── -->
+              <rect x="14" y="148" width="88" height="68" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="58" y="168" font-family="'SF Mono',Consolas,monospace" font-size="8" fill="#4A7FA5" text-anchor="middle" letter-spacing="0.06em">THE KNIGHT</text>
+              <text x="58" y="182" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">looking glass</text>
+              <!-- screen icon inside knight box -->
+              <rect x="40" y="190" width="36" height="18" rx="1" fill="none" stroke="#3A3A3F" stroke-width="1"/>
+              <line x1="55" y1="208" x2="55" y2="212" stroke="#3A3A3F" stroke-width="1"/>
+              <line x1="62" y1="208" x2="62" y2="212" stroke="#3A3A3F" stroke-width="1"/>
+              <line x1="50" y1="212" x2="67" y2="212" stroke="#3A3A3F" stroke-width="1"/>
+
+              <!-- ── CABINET (center, the file stack) ── -->
+              <!-- cabinet outer frame -->
+              <rect x="210" y="110" width="140" height="180" fill="#141416" stroke="#4A7FA5" stroke-width="1.5"/>
+              <text x="280" y="127" font-family="'SF Mono',Consolas,monospace" font-size="8.5" fill="#4A7FA5" text-anchor="middle" letter-spacing="0.06em">THE CABINET</text>
+              <text x="280" y="139" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#555558" text-anchor="middle">files / buddy home</text>
+              <!-- file: plate/today -->
+              <rect x="226" y="147" width="108" height="30" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="235" y="159" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92">plate/today.md</text>
+              <text x="235" y="170" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558">orders of the day</text>
+              <!-- file: pipeline -->
+              <rect x="226" y="183" width="108" height="30" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="235" y="195" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92">pipeline/</text>
+              <text x="235" y="206" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558">deals in flight</text>
+              <!-- file: ledger -->
+              <rect x="226" y="219" width="108" height="30" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="235" y="231" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92">ledger/</text>
+              <text x="235" y="242" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558">glass ledger, append-only</text>
+              <!-- cabinet bottom label -->
+              <text x="280" y="280" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">no brain→brain</text>
+              <text x="280" y="289" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">all lines go through here</text>
+
+              <!-- ── BRAIN SEATS (surrounding cabinet) ── -->
+              <!-- Squire Voice — top -->
+              <rect x="232" y="44" width="96" height="38" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="280" y="58" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">SQUIRE VOICE</text>
+              <text x="280" y="70" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">fast LLM · greeting · tips</text>
+              <!-- line: Squire Voice ↔ cabinet (top) -->
+              <line x1="280" y1="82" x2="280" y2="110" stroke="#3A3A3F" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- Deep Worker / The Keep — left of cabinet -->
+              <rect x="108" y="148" width="96" height="44" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="156" y="163" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">DEEP WORKER</text>
+              <text x="156" y="173" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#4A7FA5" text-anchor="middle">THE KEEP</text>
+              <text x="156" y="183" font-family="'SF Mono',Consolas,monospace" font-size="6" fill="#555558" text-anchor="middle">research · paperwork</text>
+              <!-- line: Deep Worker ↔ cabinet (left) -->
+              <line x1="204" y1="172" x2="210" y2="200" stroke="#3A3A3F" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- Coaching Analyst — right of cabinet -->
+              <rect x="356" y="148" width="96" height="44" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="404" y="163" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">COACHING</text>
+              <text x="404" y="173" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">ANALYST</text>
+              <text x="404" y="183" font-family="'SF Mono',Consolas,monospace" font-size="6" fill="#555558" text-anchor="middle">calls → coaching moments</text>
+              <!-- line: Coaching Analyst ↔ cabinet (right) -->
+              <line x1="356" y1="172" x2="350" y2="200" stroke="#3A3A3F" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- Escalator — bottom of cabinet -->
+              <rect x="232" y="318" width="96" height="38" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="280" y="332" font-family="'SF Mono',Consolas,monospace" font-size="7.5" fill="#8A8A92" text-anchor="middle">ESCALATOR</text>
+              <text x="280" y="348" font-family="'SF Mono',Consolas,monospace" font-size="6" fill="#555558" text-anchor="middle">Slack mgr + cabinet check-in</text>
+              <!-- line: Escalator ↔ cabinet (bottom) -->
+              <line x1="280" y1="318" x2="280" y2="290" stroke="#3A3A3F" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- ── MODEL CALLS → DOWN ── -->
+              <!-- arrow from cabinet downward to YOUR MODELS label -->
+              <line x1="280" y1="360" x2="280" y2="378" stroke="#555558" stroke-width="1" marker-end="url(#arr-down)"/>
+              <text x="280" y="394" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#555558" text-anchor="middle" letter-spacing="0.04em">YOUR MODELS / YOUR METAL</text>
+
+              <!-- ── KNIGHT ↔ CABINET line ── -->
+              <line x1="102" y1="182" x2="210" y2="200" stroke="#4A7FA5" stroke-width="1" marker-end="url(#arr)"/>
+              <line x1="210" y1="196" x2="102" y2="178" stroke="#4A7FA5" stroke-width="1" marker-end="url(#arr)"/>
+
+              <!-- ── GATE LINE ── -->
+              <line x1="472" y1="30" x2="472" y2="370" stroke="#3A3A3F" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <!-- gate posts -->
+              <rect x="466" y="28" width="12" height="6" fill="#3A3A3F"/>
+              <rect x="466" y="366" width="12" height="6" fill="#3A3A3F"/>
+              <text x="472" y="22" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#555558" text-anchor="middle" letter-spacing="0.06em">THE GATE</text>
+
+              <!-- asks, never acts — line crossing gate -->
+              <line x1="452" y1="200" x2="514" y2="200" stroke="#4A7FA5" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+              <text x="472" y="195" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#4A7FA5" text-anchor="middle">asks, never acts</text>
+
+              <!-- ── HQ / OWNER (right) ── -->
+              <rect x="514" y="164" width="90" height="68" fill="none" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="559" y="185" font-family="'SF Mono',Consolas,monospace" font-size="8" fill="#8A8A92" text-anchor="middle" letter-spacing="0.04em">HQ / OWNER</text>
+              <text x="559" y="197" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">approvals</text>
+              <text x="559" y="207" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">watch surface</text>
+              <text x="559" y="217" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">ledger projections</text>
+            </svg>
+          </div>
+
+          <!-- Diagram 2: A castle per customer -->
+          <div class="arch-diagram-wrap">
+            <div class="arch-diagram-label">Fig. 2 — A castle per customer</div>
+            <!--
+              Text alternative: Three separate castle system diagrams side by side, each
+              containing KEEP, CABINET, and GARRISON labels inside a rectangular wall outline.
+              Deliberate empty space separates each castle. The second castle carries a
+              banner label EVOLV. Caption below reads: No shared walls. No pooled data.
+              No vendor in the loop.
+            -->
+            <svg viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg"
+                 role="img"
+                 aria-label="A castle per customer: three separate Castle installations side by side, each an isolated rectangle containing the Keep, Cabinet, and Garrison. The middle castle bears the label EVOLV to show it wears a customer's colors. Deliberate empty space separates the three — no shared walls, no pooled data, no vendor in the loop."
+                 class="arch-svg">
+
+              <rect width="380" height="340" fill="#0A0A0B"/>
+
+              <!-- Castle helper: draws one castle system outline -->
+              <!-- Castle A — leftmost (x=16) -->
+              <rect x="16" y="60" width="96" height="190" fill="#141416" stroke="#2A2A2E" stroke-width="1"/>
+              <!-- battlements top — abstract, not turret art: thin alternating rects -->
+              <rect x="16" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="34" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="52" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="70" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="88" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <!-- interior labels -->
+              <text x="64" y="84" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#4A7FA5" text-anchor="middle" letter-spacing="0.05em">KEEP</text>
+              <rect x="28" y="88" width="72" height="1" fill="#2A2A2E"/>
+              <text x="64" y="112" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">CABINET</text>
+              <!-- file lines suggestion -->
+              <rect x="34" y="117" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="34" y="123" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="34" y="129" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="28" y="136" width="72" height="1" fill="#2A2A2E"/>
+              <text x="64" y="162" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">GARRISON</text>
+              <!-- garrison dots (6 units) -->
+              <circle cx="36" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="52" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="68" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="84" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="44" cy="190" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="76" cy="190" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <!-- ground line -->
+              <line x1="16" y1="250" x2="112" y2="250" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="64" y="262" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">customer A</text>
+
+              <!-- Castle B — center (EVOLV branded) (x=142) -->
+              <rect x="142" y="60" width="96" height="190" fill="#141416" stroke="#4A7FA5" stroke-width="1.5"/>
+              <!-- battlements -->
+              <rect x="142" y="50" width="14" height="12" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <rect x="160" y="50" width="14" height="12" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <rect x="178" y="50" width="14" height="12" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <rect x="196" y="50" width="14" height="12" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <rect x="214" y="50" width="14" height="12" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <!-- EVOLV banner — flag on top center -->
+              <line x1="190" y1="26" x2="190" y2="50" stroke="#4A7FA5" stroke-width="1"/>
+              <rect x="190" y="26" width="28" height="12" fill="#4A7FA5"/>
+              <text x="204" y="36" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#0A0A0B" text-anchor="middle" font-weight="700" letter-spacing="0.05em">EVOLV</text>
+              <!-- interior labels -->
+              <text x="190" y="84" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#4A7FA5" text-anchor="middle" letter-spacing="0.05em">KEEP</text>
+              <rect x="154" y="88" width="72" height="1" fill="#3A3A3F"/>
+              <text x="190" y="112" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">CABINET</text>
+              <rect x="160" y="117" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="160" y="123" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="160" y="129" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="154" y="136" width="72" height="1" fill="#3A3A3F"/>
+              <text x="190" y="162" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">GARRISON</text>
+              <circle cx="162" cy="176" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <circle cx="178" cy="176" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <circle cx="194" cy="176" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <circle cx="210" cy="176" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <circle cx="170" cy="190" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <circle cx="202" cy="190" r="5" fill="#1C1C1F" stroke="#4A7FA5" stroke-width="1"/>
+              <line x1="142" y1="250" x2="238" y2="250" stroke="#3A3A3F" stroke-width="1"/>
+              <text x="190" y="262" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#4A7FA5" text-anchor="middle">Evolv Buddies</text>
+
+              <!-- Castle C — rightmost (x=268) -->
+              <rect x="268" y="60" width="96" height="190" fill="#141416" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="268" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="286" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="304" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="322" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <rect x="340" y="50" width="14" height="12" fill="#1C1C1F" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="316" y="84" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#4A7FA5" text-anchor="middle" letter-spacing="0.05em">KEEP</text>
+              <rect x="280" y="88" width="72" height="1" fill="#2A2A2E"/>
+              <text x="316" y="112" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">CABINET</text>
+              <rect x="286" y="117" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="286" y="123" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="286" y="129" width="60" height="1" fill="#2A2A2E"/>
+              <rect x="280" y="136" width="72" height="1" fill="#2A2A2E"/>
+              <text x="316" y="162" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">GARRISON</text>
+              <circle cx="288" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="304" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="320" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="336" cy="176" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="296" cy="190" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <circle cx="328" cy="190" r="5" fill="#1C1C1F" stroke="#3A3A3F" stroke-width="1"/>
+              <line x1="268" y1="250" x2="364" y2="250" stroke="#2A2A2E" stroke-width="1"/>
+              <text x="316" y="262" font-family="'SF Mono',Consolas,monospace" font-size="6.5" fill="#555558" text-anchor="middle">customer C</text>
+
+              <!-- Empty space labels between castles -->
+              <text x="129" y="160" font-family="'SF Mono',Consolas,monospace" font-size="8" fill="#2A2A2E" text-anchor="middle">╳</text>
+              <text x="255" y="160" font-family="'SF Mono',Consolas,monospace" font-size="8" fill="#2A2A2E" text-anchor="middle">╳</text>
+
+              <!-- Caption -->
+              <text x="190" y="292" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">No shared walls. No pooled data.</text>
+              <text x="190" y="306" font-family="'SF Mono',Consolas,monospace" font-size="7" fill="#8A8A92" text-anchor="middle">No vendor in the loop.</text>
+            </svg>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
          A DAY ON THE LINE
     ═══════════════════════════════════════════ -->
     <section aria-labelledby="day-heading">
       <div class="container">
         <div class="section-preamble">
-          <span class="label-mono">04 / A day on the line</span>
+          <span class="label-mono">05 / A day on the line</span>
           <h2 id="day-heading" class="section-heading">
             The assembly line moves.<br />Your people respond.
           </h2>
@@ -292,7 +544,7 @@
     <section aria-labelledby="garrison-heading">
       <div class="container">
         <div class="section-preamble">
-          <span class="label-mono">05 / The garrison</span>
+          <span class="label-mono">06 / The garrison</span>
           <h2 id="garrison-heading" class="section-heading">
             Your people pick<br />their buddy.
           </h2>
@@ -353,7 +605,7 @@
     <section aria-labelledby="trust-heading">
       <div class="container">
         <div class="section-preamble">
-          <span class="label-mono">06 / The constitution</span>
+          <span class="label-mono">07 / The constitution</span>
           <h2 id="trust-heading" class="section-heading">
             Coaching offered,<br />never imposed.
           </h2>
@@ -390,7 +642,7 @@
     ═══════════════════════════════════════════ -->
     <section class="cta-section" id="commission" aria-labelledby="cta-heading">
       <div class="container">
-        <span class="label-mono">07 / Commission your Castle</span>
+        <span class="label-mono">08 / Commission your Castle</span>
         <h2 id="cta-heading" class="cta-heading">
           Ready to own your<br /><em>AI workforce?</em>
         </h2>
