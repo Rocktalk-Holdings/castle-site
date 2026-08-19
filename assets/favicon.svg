@@ -1,24 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <style>
-    @media (prefers-color-scheme: dark) {
-      .bg { fill: #1c1a17; }
-      .tower { fill: #b5821a; }
-      .battlements { fill: #b5821a; }
-      .flag { fill: #f5f2ed; }
+    .bg { fill: #0A0A0B; }
+    .mark { fill: #F0EDE8; }
+    .accent { fill: #4A7FA5; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #F0EDE8; }
+      .mark { fill: #0A0A0B; }
+      .accent { fill: #4A7FA5; }
     }
   </style>
-  <!-- bg circle -->
-  <circle class="bg" cx="16" cy="16" r="16" fill="#1c1a17"/>
-  <!-- tower body -->
-  <rect class="tower" x="9" y="14" width="14" height="13" fill="#b5821a"/>
-  <!-- battlements -->
-  <rect class="battlements" x="9" y="11" width="3" height="4" fill="#b5821a"/>
-  <rect class="battlements" x="14" y="11" width="3" height="4" fill="#b5821a"/>
-  <rect class="battlements" x="19" y="11" width="3" height="4" fill="#b5821a"/>
-  <!-- gate -->
-  <rect x="13" y="20" width="6" height="7" rx="1" fill="#1c1a17"/>
-  <!-- flag pole -->
-  <line x1="16" y1="4" x2="16" y2="11" stroke="#f5f2ed" stroke-width="1"/>
-  <!-- flag -->
-  <polygon class="flag" points="16,5 21,7.5 16,10" fill="#f5f2ed"/>
+  <!-- Background -->
+  <rect class="bg" width="32" height="32"/>
+  <!-- C letterform — two horizontal bars + vertical stem -->
+  <rect class="mark" x="10" y="9" width="12" height="2.5"/>
+  <rect class="mark" x="10" y="20.5" width="12" height="2.5"/>
+  <rect class="mark" x="10" y="9" width="2.5" height="14"/>
+  <!-- Accent bar bottom — steel blue underline -->
+  <rect class="accent" x="10" y="27" width="12" height="2"/>
 </svg>

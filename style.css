@@ -1,25 +1,26 @@
 /* ============================================================
    CASTLE — castle.rocktalk.holdings
-   Design: Luxe Editorial / Fortress
-   Palette: stone-and-amber — warm near-black, parchment, gold
-   Type: system serif display + system sans body
-   Grid: asymmetric editorial, 8pt base
+   Design: Technical / Swiss — severe, operational, credible
+   Ground: near-black #0A0A0B / off-white #F0EDE8
+   Accent: cold steel #4A7FA5 (single restrained signal tone)
+   Type: system neo-grotesque display; monospace for labels
+   Grid: full-bleed sections, 8pt base, 1px rule furniture
    ============================================================ */
 
 /* ── Tokens ── */
 :root {
   /* Color */
-  --clr-bg:          #f5f2ed;   /* warm parchment */
-  --clr-surface:     #ede9e1;   /* slightly deeper parchment */
-  --clr-stone:       #1c1a17;   /* near-black — warm not cold */
-  --clr-stone-mid:   #3d3830;   /* medium stone */
-  --clr-stone-muted: #6a6157;   /* muted warm gray — darkened to clear 4.5:1 on parchment */
-  --clr-rule:        #c9c0b0;   /* light rule line */
-  --clr-accent:      #b5821a;   /* amber gold */
-  --clr-accent-deep: #8a600e;   /* deep amber for hover */
-  --clr-accent-bg:   #fdf3dc;   /* amber tint surface */
-  --clr-text:        #1c1a17;
-  --clr-text-muted:  #6a6157;
+  --clr-bg:          #0A0A0B;   /* near-black ground */
+  --clr-surface:     #141416;   /* lifted surface */
+  --clr-surface-2:   #1C1C1F;   /* second lift */
+  --clr-rule:        #2A2A2E;   /* hairline rule */
+  --clr-rule-mid:    #3A3A3F;   /* slightly visible rule */
+  --clr-text:        #F0EDE8;   /* primary text, near-white warm */
+  --clr-text-muted:  #8A8A92;   /* secondary text */
+  --clr-text-dim:    #555558;   /* very dim — labels, decorative */
+  --clr-accent:      #4A7FA5;   /* cold steel blue */
+  --clr-accent-lit:  #6B9EC4;   /* lighter accent for hover */
+  --clr-accent-dim:  #2E5472;   /* darker accent */
 
   /* Spacing — 8pt grid */
   --sp-1:  4px;
@@ -34,25 +35,24 @@
   --sp-32: 128px;
 
   /* Type scale — modular ×1.25 */
-  --t-xs:  0.75rem;   /* 12px */
-  --t-sm:  0.875rem;  /* 14px */
-  --t-base: 1rem;     /* 16px */
-  --t-md:  1.125rem;  /* 18px */
-  --t-lg:  1.25rem;   /* 20px */
-  --t-xl:  1.5625rem; /* 25px */
-  --t-2xl: 1.9375rem; /* 31px */
-  --t-3xl: 2.4375rem; /* 39px */
-  --t-4xl: 3.0625rem; /* 49px */
-  --t-hero: clamp(2.8rem, 6vw + 1rem, 5.5rem);
+  --t-xs:   0.6875rem; /* 11px — mono labels */
+  --t-sm:   0.875rem;  /* 14px */
+  --t-base: 1rem;      /* 16px */
+  --t-md:   1.125rem;  /* 18px */
+  --t-lg:   1.25rem;   /* 20px */
+  --t-xl:   1.5625rem; /* 25px */
+  --t-2xl:  1.9375rem; /* 31px */
+  --t-3xl:  2.4375rem; /* 39px */
+  --t-4xl:  3.0625rem; /* 49px */
+  --t-hero: clamp(3rem, 7vw + 1rem, 6.5rem);
 
-  /* Radius */
-  --r-sm: 3px;
-  --r-md: 6px;
+  /* Radius — severe vocabulary */
+  --r-sm: 2px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 160ms;
-  --dur-base: 260ms;
+  --dur-base: 200ms;
 }
 
 /* ── Reset ── */
@@ -84,15 +84,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* System serif display stack — no CDN */
-.serif {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
-}
-
 /* ── Layout ── */
 .container {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 var(--sp-6);
 }
@@ -104,36 +99,45 @@ body {
 /* Section rhythm */
 section {
   padding: var(--sp-24) 0;
-}
-
-section + section {
   border-top: 1px solid var(--clr-rule);
 }
 
+.hero { border-top: none; }
+
 /* ── Typography ── */
 h1, h2, h3, h4 {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
-.label-caps {
-  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+/* Monospace section labels — the technical furniture */
+.label-mono {
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
   font-size: var(--t-xs);
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--clr-accent);
+  display: block;
+  margin-bottom: var(--sp-6);
 }
 
 p {
   max-width: 66ch;
   line-height: 1.65;
   font-size: var(--t-md);
+  color: var(--clr-text-muted);
 }
 
 p + p { margin-top: var(--sp-4); }
+
+/* Selection */
+::selection {
+  background: var(--clr-accent);
+  color: var(--clr-bg);
+}
 
 /* ── Nav ── */
 .site-nav {
@@ -142,9 +146,9 @@ p + p { margin-top: var(--sp-4); }
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(245, 242, 237, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 10, 11, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--clr-rule);
   padding: var(--sp-4) 0;
 }
@@ -157,84 +161,75 @@ p + p { margin-top: var(--sp-4); }
 }
 
 .nav-wordmark {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-size: var(--t-xl);
-  font-weight: 500;
-  color: var(--clr-stone);
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--t-lg);
+  font-weight: 700;
+  color: var(--clr-text);
   text-decoration: none;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
+  user-select: none;
 }
 
-.nav-wordmark .mark-accent { color: var(--clr-accent); }
+.nav-wordmark .mark-accent {
+  color: var(--clr-accent);
+}
 
 .nav-cta {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
   padding: var(--sp-2) var(--sp-6);
-  background: var(--clr-stone);
+  background: var(--clr-accent);
   color: var(--clr-bg);
   font-size: var(--t-sm);
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-decoration: none;
   border-radius: var(--r-sm);
   transition: background var(--dur-fast) var(--ease-out);
+  user-select: none;
 }
 
-.nav-cta:hover { background: var(--clr-accent-deep); }
+.nav-cta:hover { background: var(--clr-accent-lit); }
 .nav-cta:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--clr-accent);
+  box-shadow: 0 0 0 2px var(--clr-accent);
 }
 
 /* ── Hero ── */
 .hero {
-  padding-top: calc(var(--sp-24) + 56px); /* nav offset */
-  padding-bottom: var(--sp-24);
+  padding-top: calc(var(--sp-32) + 56px); /* nav offset + generous space */
+  padding-bottom: var(--sp-32);
   border-top: none;
 }
 
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-8);
-}
-
-@media (min-width: 900px) {
-  .hero-inner {
-    grid-template-columns: 1fr 380px;
-    align-items: end;
-    gap: var(--sp-16);
-  }
-}
-
 .hero-eyebrow {
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-8);
 }
 
 .hero-title {
   font-size: var(--t-hero);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.0;
-  letter-spacing: -0.03em;
-  color: var(--clr-stone);
-  margin-bottom: var(--sp-6);
+  letter-spacing: -0.04em;
+  color: var(--clr-text);
+  margin-bottom: var(--sp-8);
+  max-width: 18ch;
 }
 
 .hero-title em {
-  font-style: italic;
-  color: var(--clr-accent);
+  font-style: normal;
+  color: var(--clr-text-muted);
+  font-weight: 400;
 }
 
 .hero-thesis {
   font-size: var(--t-xl);
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
   max-width: 52ch;
-  line-height: 1.45;
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  line-height: 1.5;
   font-weight: 400;
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-12);
 }
 
 .hero-cta-group {
@@ -249,111 +244,138 @@ p + p { margin-top: var(--sp-4); }
   align-items: center;
   gap: var(--sp-2);
   padding: var(--sp-4) var(--sp-8);
-  background: var(--clr-stone);
+  background: var(--clr-accent);
   color: var(--clr-bg);
   font-size: var(--t-base);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
   border-radius: var(--r-sm);
   transition: background var(--dur-fast) var(--ease-out);
   user-select: none;
 }
 
-.btn-primary:hover { background: var(--clr-accent-deep); }
+.btn-primary:hover { background: var(--clr-accent-lit); }
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--clr-accent);
+  box-shadow: 0 0 0 2px var(--clr-accent-lit);
 }
 
-.hero-aside {
-  align-self: end;
+/* ── Hero rule line — typographic weight under the title ── */
+.hero-rule {
+  width: 64px;
+  height: 2px;
+  background: var(--clr-accent);
+  margin-bottom: var(--sp-8);
+  pointer-events: none;
 }
 
-.hero-keep-mark {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-/* ── Keep SVG tower ── */
-.tower-svg {
-  width: 100%;
-  height: auto;
-}
-
-/* ── Problem ── */
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-8);
-}
-
-@media (min-width: 768px) {
-  .problem-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-12);
-  }
+/* ── Section preamble ── */
+.section-preamble {
+  margin-bottom: var(--sp-12);
+  max-width: 720px;
 }
 
 .section-heading {
   font-size: var(--t-3xl);
-  color: var(--clr-stone);
-  margin-bottom: var(--sp-8);
+  color: var(--clr-text);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: var(--sp-6);
 }
 
 @media (min-width: 768px) {
   .section-heading { font-size: var(--t-4xl); }
 }
 
+.section-preamble p {
+  color: var(--clr-text-muted);
+}
+
+/* ── Problem ── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .problem-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .problem-item {
-  border-left: 2px solid var(--clr-rule);
-  padding-left: var(--sp-6);
+  padding: var(--sp-8);
+  border-top: 1px solid var(--clr-rule);
+  border-right: none;
+}
+
+@media (min-width: 768px) {
+  .problem-item:nth-child(odd) {
+    border-right: 1px solid var(--clr-rule);
+  }
+  .problem-item:nth-child(1),
+  .problem-item:nth-child(2) {
+    border-top: 1px solid var(--clr-rule);
+  }
+}
+
+.problem-item-num {
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: var(--t-xs);
+  color: var(--clr-text-dim);
+  display: block;
+  margin-bottom: var(--sp-6);
+  letter-spacing: 0.06em;
 }
 
 .problem-item h3 {
-  font-size: var(--t-xl);
-  color: var(--clr-stone);
+  font-size: var(--t-lg);
+  color: var(--clr-text);
   margin-bottom: var(--sp-3);
-  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .problem-item p {
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
   font-size: var(--t-base);
+  max-width: 48ch;
 }
 
 /* ── Castle Answer ── */
 .answer-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--sp-8);
+  gap: var(--sp-12);
 }
 
 @media (min-width: 900px) {
   .answer-layout {
-    grid-template-columns: 440px 1fr;
+    grid-template-columns: 420px 1fr;
     align-items: start;
     gap: var(--sp-16);
   }
 }
 
 .answer-pull {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
-  line-height: 1.3;
-  font-style: italic;
-  color: var(--clr-stone-mid);
-  max-width: 38ch;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: -0.03em;
+  max-width: 22ch;
 }
 
 .answer-pull strong {
-  color: var(--clr-stone);
-  font-style: normal;
+  color: var(--clr-accent);
+  font-weight: 700;
 }
 
-.answer-body p { color: var(--clr-stone-mid); }
+.answer-body p { color: var(--clr-text-muted); }
 .answer-body p + p { margin-top: var(--sp-4); }
 
 /* ── Anatomy ── */
@@ -366,14 +388,14 @@ p + p { margin-top: var(--sp-4); }
 
 .anatomy-table thead th {
   text-align: left;
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
   font-size: var(--t-xs);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--clr-text-muted);
   padding-bottom: var(--sp-4);
-  border-bottom: 1px solid var(--clr-rule);
-  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  border-bottom: 1px solid var(--clr-rule-mid);
 }
 
 .anatomy-table th:last-child,
@@ -384,7 +406,7 @@ p + p { margin-top: var(--sp-4); }
 .anatomy-table tbody tr {
   border-bottom: 1px solid var(--clr-rule);
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition:
     opacity var(--dur-base) var(--ease-out),
     transform var(--dur-base) var(--ease-out),
@@ -405,7 +427,7 @@ p + p { margin-top: var(--sp-4); }
 }
 
 .anatomy-table tbody tr:hover {
-  background: var(--clr-accent-bg);
+  background: var(--clr-surface);
 }
 
 .anatomy-table tbody td {
@@ -414,32 +436,35 @@ p + p { margin-top: var(--sp-4); }
 }
 
 .anatomy-table tbody td:first-child {
-  width: 40%;
+  width: 38%;
 }
 
 .part-name {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-size: var(--t-xl);
-  font-weight: 500;
-  color: var(--clr-stone);
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--t-lg);
+  font-weight: 600;
+  color: var(--clr-text);
   display: block;
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .part-metaphor {
-  font-size: var(--t-sm);
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: var(--t-xs);
   color: var(--clr-accent);
   display: block;
   margin-top: var(--sp-1);
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .part-function {
-  color: var(--clr-stone-mid);
-  max-width: 48ch;
+  color: var(--clr-text-muted);
+  max-width: 52ch;
   font-size: var(--t-base);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* Mobile anatomy — stack */
@@ -460,13 +485,13 @@ p + p { margin-top: var(--sp-4); }
   flex-direction: column;
   gap: 0;
   margin-top: var(--sp-8);
-  max-width: 700px;
+  max-width: 720px;
 }
 
 .day-step {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: var(--sp-4);
+  grid-template-columns: 56px 1fr;
+  gap: var(--sp-6);
   padding: var(--sp-6) 0;
   border-bottom: 1px solid var(--clr-rule);
 }
@@ -474,24 +499,27 @@ p + p { margin-top: var(--sp-4); }
 .day-step:first-child { border-top: 1px solid var(--clr-rule); }
 
 .step-number {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-size: var(--t-3xl);
-  font-weight: 400;
-  color: var(--clr-rule);
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: var(--t-xl);
+  font-weight: 500;
+  color: var(--clr-text-dim);
   line-height: 1;
-  padding-top: 2px;
+  padding-top: 3px;
   user-select: none;
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 .step-content h3 {
   font-size: var(--t-lg);
-  color: var(--clr-stone);
+  color: var(--clr-text);
   margin-bottom: var(--sp-2);
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
 .step-content p {
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
   font-size: var(--t-base);
   max-width: 56ch;
 }
@@ -501,84 +529,88 @@ p + p { margin-top: var(--sp-4); }
   padding: var(--sp-3) var(--sp-4);
   background: var(--clr-surface);
   border-left: 2px solid var(--clr-accent);
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   font-style: italic;
   font-size: var(--t-base);
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
   max-width: 52ch;
 }
 
-/* ── Garrison ── */
+/* ── Garrison — severe frames, square crop ── */
 .garrison-intro {
   max-width: 60ch;
   margin-bottom: var(--sp-8);
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
 }
 
 .character-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-4);
+  gap: 1px;                          /* tight 1px gap between frames */
+  background: var(--clr-rule-mid);   /* grid lines appear as gaps */
+  border: 1px solid var(--clr-rule-mid);
 }
 
 @media (min-width: 600px) {
   .character-strip {
     grid-template-columns: repeat(6, 1fr);
-    gap: var(--sp-6);
   }
 }
 
 .character-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--sp-3);
-  text-align: center;
+  align-items: stretch;
+  background: var(--clr-bg);
 }
 
 .character-avatar {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
   overflow: hidden;
   background: var(--clr-surface);
-  border: 1.5px solid var(--clr-rule);
+  position: relative;
 }
 
-.character-avatar svg {
+.character-avatar img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
+/* Severe monospace caption beneath each frame */
 .character-name {
-  font-size: var(--t-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--clr-stone-muted);
+  color: var(--clr-text-dim);
+  padding: var(--sp-2) var(--sp-2);
+  border-top: 1px solid var(--clr-rule);
+  text-align: center;
+  background: var(--clr-bg);
 }
 
 .garrison-caption {
   margin-top: var(--sp-8);
-  font-size: var(--t-md);
-  color: var(--clr-stone-mid);
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-size: var(--t-base);
+  color: var(--clr-text-muted);
   font-style: italic;
   max-width: 60ch;
 }
 
-/* ── Trust ── */
+/* ── Trust — constitution block ── */
 .trust-block {
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-rule);
-  border-left: 3px solid var(--clr-accent);
-  padding: var(--sp-8) var(--sp-8) var(--sp-8) var(--sp-8);
+  border: 1px solid var(--clr-rule-mid);
+  border-left: 2px solid var(--clr-accent);
   max-width: 720px;
   margin-top: var(--sp-8);
+  background: var(--clr-surface);
 }
 
 .trust-item {
-  padding: var(--sp-4) 0;
+  padding: var(--sp-6) var(--sp-8);
   border-bottom: 1px solid var(--clr-rule);
 }
 
@@ -586,47 +618,50 @@ p + p { margin-top: var(--sp-4); }
 
 .trust-item h3 {
   font-size: var(--t-lg);
-  color: var(--clr-stone);
+  color: var(--clr-text);
   margin-bottom: var(--sp-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .trust-item p {
-  color: var(--clr-stone-mid);
+  color: var(--clr-text-muted);
   font-size: var(--t-base);
   max-width: 58ch;
 }
 
 .trust-item em {
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   font-style: italic;
-  color: var(--clr-stone);
+  color: var(--clr-text);
 }
 
 /* ── CTA Section ── */
 .cta-section {
-  background: var(--clr-stone);
-  color: var(--clr-bg);
+  background: var(--clr-surface);
+  border-top: 1px solid var(--clr-rule-mid);
+  border-bottom: none;
 }
 
-.cta-section .label-caps { color: var(--clr-accent); }
+.cta-section .label-mono { color: var(--clr-accent); }
 
 .cta-heading {
-  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-  color: var(--clr-bg);
+  font-size: clamp(2.2rem, 4.5vw + 1rem, 4rem);
+  color: var(--clr-text);
   margin: var(--sp-6) 0;
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  font-weight: 400;
-  line-height: 1.1;
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
   max-width: 22ch;
 }
 
 .cta-heading em {
-  font-style: italic;
+  font-style: normal;
   color: var(--clr-accent);
 }
 
 .cta-sub {
-  color: rgba(245, 242, 237, 0.65);
+  color: var(--clr-text-muted);
   font-size: var(--t-base);
   max-width: 52ch;
   margin-bottom: var(--sp-8);
@@ -638,31 +673,27 @@ p + p { margin-top: var(--sp-4); }
   gap: var(--sp-3);
   padding: var(--sp-4) var(--sp-8);
   background: var(--clr-accent);
-  color: var(--clr-stone);
+  color: var(--clr-bg);
   font-size: var(--t-base);
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   text-decoration: none;
   border-radius: var(--r-sm);
-  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out);
   user-select: none;
 }
 
-.btn-commission:hover {
-  background: #f0a830;
-  color: var(--clr-stone);
-}
-
+.btn-commission:hover { background: var(--clr-accent-lit); }
 .btn-commission:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(245, 242, 237, 0.6);
+  box-shadow: 0 0 0 2px var(--clr-accent-lit);
 }
 
 /* ── Footer ── */
 .site-footer {
   padding: var(--sp-8) 0;
-  border-top: 1px solid rgba(245, 242, 237, 0.12);
-  background: var(--clr-stone);
+  border-top: 1px solid var(--clr-rule);
+  background: var(--clr-bg);
 }
 
 .footer-inner {
@@ -674,25 +705,16 @@ p + p { margin-top: var(--sp-4); }
 }
 
 .footer-copy {
-  font-size: var(--t-sm);
-  color: rgba(245, 242, 237, 0.45);
+  font-family: "SF Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: var(--t-xs);
+  color: var(--clr-text-dim);
+  letter-spacing: 0.05em;
 }
 
 .footer-note {
   font-size: var(--t-sm);
-  color: rgba(245, 242, 237, 0.3);
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  color: var(--clr-text-dim);
   font-style: italic;
-}
-
-/* ── Section preamble layout ── */
-.section-preamble {
-  margin-bottom: var(--sp-12);
-}
-
-.section-preamble .label-caps {
-  display: block;
-  margin-bottom: var(--sp-4);
 }
 
 /* ── Utility ── */
@@ -711,11 +733,14 @@ p + p { margin-top: var(--sp-4); }
 /* Focus ring via box-shadow, never outline */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--clr-accent);
+  box-shadow: 0 0 0 2px var(--clr-accent);
 }
 
-/* Selection */
-::selection {
-  background: var(--clr-accent);
-  color: var(--clr-bg);
+/* Hover states only on devices that support them */
+@media (hover: none) {
+  .nav-cta:hover,
+  .btn-primary:hover,
+  .btn-commission:hover {
+    background: var(--clr-accent);
+  }
 }
