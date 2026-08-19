@@ -119,7 +119,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--clr-accent);
+  color: #A8C6DE; /* eyebrow labels brightened (Drew 2026-08-19) — was accent */
   display: block;
   margin-bottom: var(--sp-6);
 }
@@ -516,6 +516,10 @@ p + p { margin-top: var(--sp-4); }
   width: 100%;
   height: auto;
   display: block;
+  /* visible by default — JS opts INTO the reveal via .will-reveal so a failed
+     observer can never strand the diagrams invisible */
+}
+.arch-diagram-wrap svg.will-reveal {
   opacity: 0;
   transform: translateY(8px);
   transition:

@@ -18,6 +18,7 @@
       return;
     }
 
+    svgs.forEach(function (svg) { svg.classList.add('will-reveal'); });
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
